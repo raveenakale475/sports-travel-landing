@@ -87,6 +87,3 @@ Or connect your GitHub repo to Vercel for automatic deployments.
 - Add multi-language support
 - Integrate with CRM system
 
-## 📱 Contact
-
-For questions or support, reach out to your development team.
