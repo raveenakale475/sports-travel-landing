@@ -96,7 +96,7 @@ const LandingPage: React.FC = () => {
       title: "Super Bowl Experience",
       price: "$5,799",
       image:
-        "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop",
       date: "Feb 2026",
     },
   ];
@@ -167,14 +167,85 @@ const LandingPage: React.FC = () => {
   //     }
   //   };
 
+  // const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   const newErrors = validateForm();
+
+  //   if (Object.keys(newErrors).length === 0) {
+  //     try {
+  //       // Send to backend API
+  //       const response = await fetch("http://localhost:5000/api/leads", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(formData),
+  //       });
+
+  //       const data = await response.json();
+
+  //       if (data.success) {
+  //         setShowToast(true);
+  //         setShowForm(false);
+  //         setFormData({ name: "", email: "", phone: "", message: "" });
+  //         setErrors({});
+  //         setTimeout(() => setShowToast(false), 3000);
+  //       } else {
+  //         alert(data.message || "Something went wrong!");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error submitting form:", error);
+  //       alert("Failed to submit. Please try again.");
+  //     }
+  //   } else {
+  //     setErrors(newErrors);
+  //   }
+  // };
+
+  // const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   const newErrors = validateForm();
+
+  //   if (Object.keys(newErrors).length === 0) {
+  //     try {
+  //       // Call Next.js API route (no separate backend needed!)
+  //       const response = await fetch("/api/leads", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(formData),
+  //       });
+
+  //       const data = await response.json();
+
+  //       if (response.ok && data.success) {
+  //         setShowToast(true);
+  //         setShowForm(false);
+  //         setFormData({ name: "", email: "", phone: "", message: "" });
+  //         setErrors({});
+  //         setTimeout(() => setShowToast(false), 3000);
+  //       } else {
+  //         alert(data.message || "Something went wrong!");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error submitting form:", error);
+  //       alert("Failed to submit. Please try again.");
+  //     }
+  //   } else {
+  //     setErrors(newErrors);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const newErrors = validateForm();
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        // Send to backend API
-        const response = await fetch("http://localhost:5000/api/leads", {
+        console.log("Submitting form data:", formData);
+
+        const response = await fetch("/api/leads", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -182,9 +253,19 @@ const LandingPage: React.FC = () => {
           body: JSON.stringify(formData),
         });
 
-        const data = await response.json();
+        console.log("Response status:", response.status);
+        console.log("Response headers:", response.headers.get("content-type"));
 
-        if (data.success) {
+        // Check if response is JSON
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Server did not return JSON. Check API route.");
+        }
+
+        const data = await response.json();
+        console.log("Response data:", data);
+
+        if (response.ok && data.success) {
           setShowToast(true);
           setShowForm(false);
           setFormData({ name: "", email: "", phone: "", message: "" });
@@ -195,7 +276,7 @@ const LandingPage: React.FC = () => {
         }
       } catch (error) {
         console.error("Error submitting form:", error);
-        alert("Failed to submit. Please try again.");
+        alert("Failed to submit. Please check console for details.");
       }
     } else {
       setErrors(newErrors);
@@ -221,19 +302,19 @@ const LandingPage: React.FC = () => {
           <div className="hidden md:flex items-center space-x-8">
             <button
               onClick={() => scrollToSection("packages")}
-              className="cursor-pointer hover:text-blue-600 transition"
+              className="cursor-pointer hover:text-purple-800 transition text-blue-600"
             >
               Packages
             </button>
             <button
               onClick={() => scrollToSection("how-it-works")}
-              className="cursor-pointer hover:text-blue-600 transition"
+              className="cursor-pointer hover:text-purple-800 transition text-blue-600"
             >
               How It Works
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="cursor-pointer hover:text-blue-600 transition"
+              className="cursor-pointer hover:text-purple-800 transition text-blue-600"
             >
               About
             </button>
@@ -326,7 +407,7 @@ const LandingPage: React.FC = () => {
       {/* Why Choose Us */}
       <section className="py-20 bg-white" id="about">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-16 text-blue-600">
             Why Choose Us
           </h2>
           <div className="grid md:grid-cols-4 gap-8">
@@ -372,7 +453,9 @@ const LandingPage: React.FC = () => {
       {/* Top Packages */}
       <section className="py-20 bg-gray-50" id="packages">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4">Top Packages</h2>
+          <h2 className="text-4xl font-bold text-center mb-4 text-blue-600">
+            Top Packages
+          </h2>
           <p className="text-center text-gray-600 mb-12">
             Exclusive access to the world's greatest sporting events
           </p>
@@ -393,7 +476,9 @@ const LandingPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{pkg.title}</h3>
+                  <h3 className="text-xl font-bold mb-2 text-black">
+                    {pkg.title}
+                  </h3>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-2xl font-bold text-blue-600">
                       {pkg.price}
@@ -459,8 +544,10 @@ const LandingPage: React.FC = () => {
       {/* How It Works */}
       <section className="py-20 bg-gray-50" id="how-it-works">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">How It Works</h2>
-          <div className="grid md:grid-cols-3 gap-12">
+          <h2 className="text-4xl font-bold text-center mb-16 text-blue-600">
+            How It Works
+          </h2>
+          <div className="grid md:grid-cols-3 gap-12 text-black">
             {[
               {
                 step: "01",
@@ -499,7 +586,7 @@ const LandingPage: React.FC = () => {
       {/* Add-Ons */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl font-bold text-center mb-4 text-blue-600">
             Exclusive Add-Ons
           </h2>
           <p className="text-center text-gray-600 mb-12">
@@ -510,7 +597,7 @@ const LandingPage: React.FC = () => {
               {addOns.map((addon, i) => (
                 <div
                   key={i}
-                  className="w-80 bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2"
+                  className="w-80 bg-white text-black rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2"
                 >
                   <div className="h-48 overflow-hidden">
                     <img
@@ -607,11 +694,13 @@ const LandingPage: React.FC = () => {
             >
               <X size={24} />
             </button>
-            <h3 className="text-2xl font-bold mb-2">Plan Your Trip</h3>
-            <p className="text-gray-600 mb-6">
+            <h3 className="text-2xl font-bold mb-2 text-blue-600">
+              Plan Your Trip
+            </h3>
+            <p className="text-gray-900 mb-6">
               Fill out the form and we'll get back to you within 24 hours
             </p>
-            <div className="space-y-4">
+            <div className="space-y-4 text-black">
               <div>
                 <input
                   type="text"
@@ -620,7 +709,7 @@ const LandingPage: React.FC = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none ${
+                  className={` w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none ${
                     errors.name ? "border-red-500" : "border-gray-300"
                   }`}
                 />

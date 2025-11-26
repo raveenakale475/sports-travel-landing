@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "server": "node server.js",
+    "server:dev": "nodemon server.js",
+    "both": "concurrently \"npm run dev\" \"npm run server:dev\""
   },
   "dependencies": {
     "body-parser": "^2.2.1",
