@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SportTravel Landing Page
 
-## Getting Started
+A modern, responsive landing page for sports travel packages built with Next.js, React, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- ✅ Fully responsive design (mobile, tablet, desktop)
+- ✅ Modern UI with smooth animations
+- ✅ Lead capture form with validation
+- ✅ Floating WhatsApp button
+- ✅ Section navigation
+- ✅ Success toast notifications
+- ✅ TypeScript for type safety
+- ✅ Clean, modular component architecture
+
+## 📁 Folder Structure
+```
+sports-travel-landing/
+├── app/
+│   ├── layout.tsx          # Root layout
+│   ├── page.tsx            # Home page
+│   └── globals.css         # Global styles
+├── components/
+│   └── LandingPage.tsx     # Main landing page component
+├── public/                 # Static assets
+├── package.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend:** Next.js 14, React 18, TypeScript
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **Backend (Optional):** Express.js
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Installation
+```bash
+# Install dependencies
+npm install
 
-## Learn More
+# Run development server
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# Build for production
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Start production server
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌐 Deployment
 
-## Deploy on Vercel
+### Vercel (Recommended)
+```bash
+npm install -g vercel
+vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Or connect your GitHub repo to Vercel for automatic deployments.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎯 Key Components
+
+- **Hero Section:** Eye-catching banner with CTAs
+- **Packages Section:** Grid of travel packages
+- **Featured Event:** Spotlight on premium event
+- **How It Works:** 3-step process explanation
+- **Add-Ons:** Horizontal scroller with upgrades
+- **Lead Form:** Modal with validation
+- **Footer:** Links and contact info
+
+## 📝 Assumptions Made
+
+1. Images are sourced from Unsplash for demo purposes
+2. WhatsApp number is placeholder (update in code)
+3. Form submission logs to console (connect to backend API)
+4. No database integration (can be added)
+
+## 🔧 Future Improvements
+
+- Add backend API with database integration
+- Implement email notifications for leads
+- Add payment gateway integration
+- Create admin dashboard for managing packages
+- Add user authentication
+- Implement blog section
+- Add multi-language support
+- Integrate with CRM system
+
+## 📱 Contact
+
+For questions or support, reach out to your development team.
